@@ -1,6 +1,11 @@
 #include "Game.h"
 #include <iostream>
 
+bool Game::HasWinner()
+{
+	return false;
+}
+
 Game::Game() : running(false), window(nullptr), board(new char*[BOARD_SIZE])
 {
 	for (int i = 0; i < BOARD_SIZE; i++)

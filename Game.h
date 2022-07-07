@@ -9,6 +9,7 @@ private:
 	SDL_Window* window;
 	char **board;
 	bool running;
+	bool HasWinner();
 public:
 	Game();
 	~Game();
