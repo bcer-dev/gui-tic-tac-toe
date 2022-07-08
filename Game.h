@@ -7,6 +7,8 @@ class Game
 {
 private:
 	SDL_Window* window;
+	SDL_Renderer* renderer;
+	SDL_Texture* board_img;
 	char **board;
 	bool running;
 	bool HasWinner();
