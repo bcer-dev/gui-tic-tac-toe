@@ -1,7 +1,10 @@
 #include "Game.h"
 #include <iostream>
+#include "Player.h"
 
 // Todo: use SDL_ShowSimpleMessageBox(0, "Test", "Hello", window); to show winner
+Player* player_x;
+Player* player_o;
 
 bool Game::HasWinner()
 {
@@ -26,6 +29,8 @@ Game::~Game()
 		delete[] board[i];
 	delete[] board;
 
+	delete player_x;
+	delete player_o;
 	SDL_DestroyTexture(board_img);
 	SDL_Quit();
 }
@@ -68,6 +73,13 @@ void Game::Init(std::string title, int w, int h)
 	board_img = SDL_CreateTextureFromSurface(renderer, img_sf);
 	SDL_FreeSurface(img_sf);
 
+	player_x = new Player(PlayerLetter::X, renderer);
+	player_x->SetImage("Assets/X.bmp");
+	player_x->Instantiate(20, 20);
+
+	player_o = new Player(PlayerLetter::O, renderer);
+	player_o->SetImage("Assets/O.bmp");
+
 	running = true;
 }
 
@@ -91,6 +103,7 @@ void Game::ProcessInput()
 
 void Game::Update()
 {
+	SDL_Delay(10);
 }
 
 void Game::Render()
@@ -98,6 +111,8 @@ void Game::Render()
 	SDL_SetRenderDrawColor(renderer, 0x00, 0xff, 0x00, 0xff);
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, board_img, NULL, NULL);
+	player_x->Render();
+	player_o->Render();
 	SDL_RenderPresent(renderer);
 }
 
